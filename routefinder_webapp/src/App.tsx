@@ -11,6 +11,7 @@ function App() {
           Edit <code>src/App.tsx</code> and save to reload.
         </p>
         <p>Test for auto-deploy</p>
+        <p>Bok Iro</p>
         <a
           className="App-link"
           href="https://reactjs.org"
