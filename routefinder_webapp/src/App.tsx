@@ -1,6 +1,7 @@
 import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
+import { Box, Typography } from "@mui/material";
 
 function App() {
   return (
@@ -12,6 +13,9 @@ function App() {
         </p>
         <p>Test for auto-deploy</p>
         <p>Bok Iro</p>
+        <Box>
+          <Typography variant="h1">Domo arigato Mr. Roboto</Typography>
+        </Box>
         <a
           className="App-link"
           href="https://reactjs.org"
