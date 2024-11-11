@@ -1,10 +1,17 @@
 import { Box, Typography } from "@mui/material";
 import { GoogleMap, useJsApiLoader } from "@react-google-maps/api";
 import React, { FC } from "react";
+import { useAddressContext } from "../../context/AddressContext";
 
 type Props = {};
 
 const Map: FC<Props> = (props: Props) => {
+  const { addressStart, addressDestinationList, setAddresses } =
+    useAddressContext();
+
+  console.log("map", { ...addressStart });
+  console.log("map", addressDestinationList);
+
   const containerStyle = {
     width: "400px",
     height: "400px",

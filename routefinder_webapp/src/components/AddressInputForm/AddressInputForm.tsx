@@ -1,9 +1,16 @@
 import { Autocomplete, Button, Stack, TextField } from "@mui/material";
 import React, { FC } from "react";
+import { useAddressContext } from "../../context/AddressContext";
 
 type Props = {};
 
 export const AddressInputForm: FC<Props> = (props: Props) => {
+  const { addressStart, addressDestinationList, setAddresses } =
+    useAddressContext();
+
+  console.log("address input form", { ...addressStart });
+  console.log("address input form", addressDestinationList);
+
   const options = [
     "dog",
     "child",
