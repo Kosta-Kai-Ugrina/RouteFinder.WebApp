@@ -2,7 +2,7 @@ import { Address } from "../context/AddressContext";
 import axios from "axios";
 
 const API_URL =
-  "routefinderapi-gacyatghdxb0dafz.westeurope-01.azurewebsites.net";
+  "https://routefinderapi-gacyatghdxb0dafz.westeurope-01.azurewebsites.net/";
 
 // const API_URL = "http://localhost:5295";
 
