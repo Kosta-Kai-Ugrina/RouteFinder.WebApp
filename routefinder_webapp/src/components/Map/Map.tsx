@@ -1,7 +1,8 @@
 import { Box, Typography } from "@mui/material";
-import { GoogleMap, useJsApiLoader } from "@react-google-maps/api";
+import { GoogleMap, Polyline, useJsApiLoader } from "@react-google-maps/api";
 import React, { FC } from "react";
 import { useAddressContext } from "../../context/AddressContext";
+import * as polyline from "polyline";
 
 type Props = {};
 
@@ -12,6 +13,18 @@ const Map: FC<Props> = (props: Props) => {
   console.log("map", { ...addressStart });
   console.log("map", addressDestinationList);
 
+  const encodedPolyLine = "wnvrIotwkAvBzKhCzL\\p@x@jAFZX`@";
+  const decodedPolyLine = polyline.decode(encodedPolyLine);
+  const toLatLng = (x: number[]) => {
+    return { lat: x[0], lng: x[1] };
+  };
+  const polyLine = decodedPolyLine.map(toLatLng);
+
+  const POLYLINE_OPTIONS = {
+    strokeColor: "#FF0000",
+    strokeOpacity: 1.0,
+    strokeWeight: 2,
+  };
   const containerStyle = {
     width: "400px",
     height: "400px",
@@ -24,7 +37,7 @@ const Map: FC<Props> = (props: Props) => {
 
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
-    googleMapsApiKey: "AIzaSyAmEU3Al48aFyYO_cjmGB0yNVIpFaK1bMw",
+    googleMapsApiKey: "AIzaSyBscK0nlZ2W-nhg7IE1n-mX-PfofXKi7uQ",
   });
 
   const [map, setMap] = React.useState(null);
@@ -50,6 +63,7 @@ const Map: FC<Props> = (props: Props) => {
         onLoad={onLoad}
         onUnmount={onUnmount}
       >
+        <Polyline options={POLYLINE_OPTIONS} path={polyLine} />
         {/* Child components, such as markers, info windows, etc. */}
         <></>
       </GoogleMap>
