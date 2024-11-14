@@ -1,10 +1,5 @@
 import React, { createContext, useContext, useState, ReactNode } from "react";
-
-export interface Address {
-  name: string;
-  latitude?: number;
-  longitude?: number;
-}
+import { Address } from "../types";
 
 const defaultAddressStart: Address = {
   name: "Mover Systems",
