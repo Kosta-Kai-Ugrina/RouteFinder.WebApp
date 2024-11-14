@@ -24,7 +24,7 @@ export const DestinationAddressSearchBoxList = () => {
   }, [searchBoxList]);
 
   return (
-    <Stack direction={"row"}>
+    <Stack direction={"row"} spacing={2}>
       <Stack spacing={2}>{searchBoxList}</Stack>
       <AddRemoveButtonGroup />
     </Stack>
@@ -41,6 +41,7 @@ function addressesToSearchBoxes(
   return addressDestinationList.map((_, i) => {
     return (
       <SearchBox
+        key={`destinationSearchBox${i}`}
         onPlaceSelected={(place) => {
           const address = toAddress(place);
           addressDestinationList[i] = address;

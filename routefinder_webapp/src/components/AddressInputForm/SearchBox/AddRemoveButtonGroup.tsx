@@ -1,4 +1,4 @@
-import { Button, ButtonGroup, Fab, Stack } from "@mui/material";
+import { Button, ButtonGroup, Fab, Stack, Tooltip } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import React, { FC } from "react";
@@ -18,13 +18,22 @@ export const AddRemoveButtonGroup: FC = () => {
   };
 
   return (
-    <Stack spacing={2}>
-      <Fab color="primary" size="small" onClick={addAddress}>
-        <AddIcon />
-      </Fab>
-      <Fab color="primary" size="small" onClick={removeAddress}>
-        <RemoveIcon />
-      </Fab>
+    <Stack spacing={1}>
+      <Tooltip placement="right" title="Add delivery address">
+        <Fab color="primary" size="small" onClick={addAddress}>
+          <AddIcon />
+        </Fab>
+      </Tooltip>
+      <Tooltip placement="right" title="Remove delivery address">
+        <Fab
+          disabled={addressDestinationList.length <= 1}
+          color="primary"
+          size="small"
+          onClick={removeAddress}
+        >
+          <RemoveIcon />
+        </Fab>
+      </Tooltip>
     </Stack>
   );
 };

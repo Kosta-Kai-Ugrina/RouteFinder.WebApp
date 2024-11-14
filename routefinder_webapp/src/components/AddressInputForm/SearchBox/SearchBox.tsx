@@ -8,5 +8,11 @@ interface Props {
 export const SearchBox: FC<Props> = (props) => {
   const apiKey = process.env.REACT_APP_GOOGLE_API_KEY;
 
-  return <Autocomplete style={{ width: 200 }} apiKey={apiKey} {...props} />;
+  return (
+    <Autocomplete
+      style={{ width: 200, height: 30 }}
+      apiKey={apiKey}
+      {...props}
+    />
+  );
 };

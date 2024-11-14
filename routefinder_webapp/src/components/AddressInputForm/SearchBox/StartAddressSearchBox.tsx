@@ -8,6 +8,7 @@ export const StartAddressSearchBox: FC = () => {
 
   return (
     <SearchBox
+      key="searchBoxStartAddress"
       onPlaceSelected={(placeSelected) => {
         const address = toAddress(placeSelected);
         setAddresses({ addressStart: address });
