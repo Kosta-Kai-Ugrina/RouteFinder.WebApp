@@ -1,5 +1,5 @@
 import { Autocomplete, Button, Stack, TextField } from "@mui/material";
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 import { useAddressContext } from "../../context/AddressContext";
 import {
   findFastestRoute,
@@ -7,12 +7,18 @@ import {
   testOptimizeWrongRoute1,
   testOptimizeWrongRoute2,
 } from "../../api/routeFinderApi";
+import { SearchBox } from "./SearchBox/SearchBox";
 
 type Props = {};
 
 export const AddressInputForm: FC<Props> = (props: Props) => {
   const { addressStart, addressDestinationList, setAddresses } =
     useAddressContext();
+
+  useEffect(() => {
+    console.log("ADDRESS START CHANGE REGISTERED");
+    console.log(addressStart);
+  }, [addressStart]);
 
   console.log("address input form", { ...addressStart });
   console.log("address input form", addressDestinationList);
@@ -33,7 +39,20 @@ export const AddressInputForm: FC<Props> = (props: Props) => {
 
   return (
     <Stack spacing={2}>
-      <Autocomplete
+      <SearchBox
+        onPlaceSelected={(place) => {
+          console.log(place);
+          setAddresses(
+            {
+              name: place.formatted_address!,
+              latitude: place.geometry?.location?.lat(),
+              longitude: place.geometry?.location?.lng(),
+            },
+            []
+          );
+        }}
+      />
+      {/* <Autocomplete
         id="PointA"
         freeSolo
         options={options.map((option) => option)}
@@ -44,7 +63,7 @@ export const AddressInputForm: FC<Props> = (props: Props) => {
         freeSolo
         options={options.map((option) => option)}
         renderInput={(params) => <TextField {...params} label="Point B" />}
-      />
+      /> */}
       <Stack direction="row" spacing={2}>
         <Button variant="contained">Find route</Button>
         <Button
