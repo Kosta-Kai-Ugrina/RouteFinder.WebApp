@@ -7,13 +7,15 @@ const defaultAddressStart: Address = {
   longitude: 12.577998762094255,
 };
 
+const defaultDestinationList: Address[] = [{}];
+
 interface AddressContextType {
   addressStart: Address;
   addressDestinationList: Address[];
-  setAddresses: (
-    addressStart: Address,
-    addressDestinationList: Address[]
-  ) => void;
+  setAddresses: (route: {
+    addressStart?: Address | undefined;
+    addressDestinationList?: Address[] | undefined;
+  }) => void;
 }
 
 const AddressContext = createContext<AddressContextType | undefined>(undefined);
@@ -33,18 +35,21 @@ interface AddressProviderProps {
 export const AddressProvider: React.FC<AddressProviderProps> = ({
   children,
 }) => {
-  const [addressStart, setAddressStart] =
-    useState<Address>(defaultAddressStart);
-  const [addressDestinationList, setAddressDestinationList] = useState<
-    Address[]
-  >([]);
+  const [addressStart, setAddressStart] = useState(defaultAddressStart);
+  const [addressDestinationList, setAddressDestinationList] = useState(
+    defaultDestinationList
+  );
 
-  const setAddresses = (
-    addressStart: Address,
-    addressDestinationList: Address[]
-  ) => {
-    setAddressStart(addressStart);
-    setAddressDestinationList(addressDestinationList);
+  const setAddresses = (route: {
+    addressStart?: Address | undefined;
+    addressDestinationList?: Address[] | undefined;
+  }) => {
+    if (route.addressStart !== undefined) {
+      setAddressStart(route.addressStart);
+    }
+    if (route.addressDestinationList !== undefined) {
+      setAddressDestinationList(route.addressDestinationList);
+    }
   };
 
   return (

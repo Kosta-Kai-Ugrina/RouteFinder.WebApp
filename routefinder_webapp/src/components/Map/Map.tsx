@@ -10,9 +10,6 @@ const Map: FC<Props> = (props: Props) => {
   const { addressStart, addressDestinationList, setAddresses } =
     useAddressContext();
 
-  console.log("map", { ...addressStart });
-  console.log("map", addressDestinationList);
-
   const encodedPolyLine = "wnvrIotwkAvBzKhCzL\\p@x@jAFZX`@";
   const decodedPolyLine = polyline.decode(encodedPolyLine);
   const toLatLng = (x: number[]) => {
@@ -63,7 +60,7 @@ const Map: FC<Props> = (props: Props) => {
         onLoad={onLoad}
         onUnmount={onUnmount}
       >
-        <Polyline options={POLYLINE_OPTIONS} path={polyLine} />
+        {/* <Polyline options={POLYLINE_OPTIONS} path={polyLine} /> */}
         {/* Child components, such as markers, info windows, etc. */}
         <></>
       </GoogleMap>
