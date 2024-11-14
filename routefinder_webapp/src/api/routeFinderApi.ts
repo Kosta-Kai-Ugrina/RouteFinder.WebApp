@@ -5,10 +5,8 @@ import {
   exampleWrongOrder2,
 } from "./routeFinderApiTestExampleData";
 
-// const API_URL =
-//   "https://routefinderapi-gacyatghdxb0dafz.westeurope-01.azurewebsites.net/";
-
-const API_URL = "http://localhost:5295";
+const API_URL = process.env.REACT_APP_ROUTEFINDER_API_URL;
+const API_URL_LOCALHOST = process.env.REACT_APP_ROUTEFINDER_API_URL_LOCALHOST;
 
 export async function findOptimalAddressOrder(
   routeRequest: RouteRequest
