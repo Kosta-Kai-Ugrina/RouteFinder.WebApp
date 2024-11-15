@@ -12,6 +12,9 @@ export const DestinationAddressSearchBoxList = () => {
   const [searchBoxList, setSearchBoxList] = useState<ReactNode>([]);
 
   useEffect(() => {
+    console.log("UPDATE addressDestinationList");
+    console.log(addressDestinationList);
+
     const searchBoxes = addressesToSearchBoxes(
       addressDestinationList,
       setAddresses

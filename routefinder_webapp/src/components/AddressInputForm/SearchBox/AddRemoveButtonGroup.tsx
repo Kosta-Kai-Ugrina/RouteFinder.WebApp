@@ -24,15 +24,21 @@ export const AddRemoveButtonGroup: FC = () => {
           <AddIcon />
         </Fab>
       </Tooltip>
-      <Tooltip placement="right" title="Remove delivery address">
-        <Fab
-          disabled={addressDestinationList.length <= 1}
-          color="primary"
-          size="small"
-          onClick={removeAddress}
-        >
-          <RemoveIcon />
-        </Fab>
+      <Tooltip
+        disableHoverListener={addressDestinationList.length <= 1}
+        placement="right"
+        title="Remove delivery address"
+      >
+        <div>
+          <Fab
+            disabled={addressDestinationList.length <= 1}
+            color="primary"
+            size="small"
+            onClick={removeAddress}
+          >
+            <RemoveIcon />
+          </Fab>
+        </div>
       </Tooltip>
     </Stack>
   );
