@@ -1,5 +1,5 @@
 import { Autocomplete, Button, Stack, TextField } from "@mui/material";
-import React, { FC, useEffect } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { useAddressContext } from "../../context/AddressContext";
 import {
   findFastestRoute,
@@ -18,6 +18,14 @@ type Props = {};
 export const AddressInputForm: FC<Props> = (props: Props) => {
   const { addressStart, addressDestinationList, setAddresses } =
     useAddressContext();
+
+  useEffect(() => {
+    console.log("UPDATE addressStart", addressStart);
+  }, [addressStart]);
+
+  useEffect(() => {
+    console.log("UPDATE addressDestinationList", addressDestinationList);
+  }, [addressDestinationList]);
 
   return (
     <Stack spacing={10}>

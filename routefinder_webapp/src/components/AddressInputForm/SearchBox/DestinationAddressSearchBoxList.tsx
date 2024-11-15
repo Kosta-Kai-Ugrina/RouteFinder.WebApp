@@ -12,19 +12,12 @@ export const DestinationAddressSearchBoxList = () => {
   const [searchBoxList, setSearchBoxList] = useState<ReactNode>([]);
 
   useEffect(() => {
-    console.log("UPDATE addressDestinationList");
-    console.log(addressDestinationList);
-
     const searchBoxes = addressesToSearchBoxes(
       addressDestinationList,
       setAddresses
     );
     setSearchBoxList(searchBoxes);
   }, [addressDestinationList]);
-
-  useEffect(() => {
-    console.log("UPDATE searchBoxList");
-  }, [searchBoxList]);
 
   return (
     <Stack direction={"row"} spacing={2}>

@@ -16,9 +16,7 @@ function App() {
           <Grid size={{ sm: 12, md: 6 }}>
             <AddressInputForm />
           </Grid>
-          <Grid size={{ sm: 12, md: 6 }}>
-            <Map />
-          </Grid>
+          <Grid size={{ sm: 12, md: 6 }}>{/* <Map /> */}</Grid>
         </Grid>
       </Box>
     </AddressProvider>

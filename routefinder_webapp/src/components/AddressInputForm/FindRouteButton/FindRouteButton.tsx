@@ -7,6 +7,12 @@ import { Address } from "../../../types";
 export const FindRouteButton: FC = () => {
   const { addressStart, addressDestinationList } = useAddressContext();
   const makeRequest = () => {
+    console.log(
+      "attempting find route request with data:",
+      addressStart,
+      addressDestinationList
+    );
+
     const addressDestinationListFixed = fixDestinationList(
       addressDestinationList
     );
@@ -21,12 +27,16 @@ export const FindRouteButton: FC = () => {
       return;
     }
 
+    console.log("Request is valid, attempting request...");
+
     const result = findFastestRoute({
       addressStart,
       addressDestinationList: addressDestinationListFixed,
     });
-    console.log("FIND ROUTE RESULT");
-    console.log(result);
+    result.then((routeData) => {
+      console.log("FIND ROUTE RESULT");
+      console.log(routeData);
+    });
   };
 
   return (

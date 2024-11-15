@@ -45,9 +45,11 @@ export const AddressProvider: React.FC<AddressProviderProps> = ({
     addressDestinationList?: Address[] | undefined;
   }) => {
     if (route.addressStart !== undefined) {
+      console.log("CALL setAddressStart");
       setAddressStart(route.addressStart);
     }
     if (route.addressDestinationList !== undefined) {
+      console.log("CALL setAddressDestinationList");
       setAddressDestinationList(route.addressDestinationList);
     }
   };
