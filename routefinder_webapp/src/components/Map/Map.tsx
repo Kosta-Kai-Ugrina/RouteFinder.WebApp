@@ -1,12 +1,13 @@
-import { Box, Typography } from "@mui/material";
-import { GoogleMap, Polyline, useJsApiLoader } from "@react-google-maps/api";
-import React, { FC } from "react";
+import { GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api";
+import React, { CSSProperties, FC, PropsWithChildren } from "react";
 import { useAddressContext } from "../../context/AddressContext";
 import * as polyline from "polyline";
+import { Polyline } from "./Shapes/Polyline";
+import { Markers } from "./Shapes/Markers";
 
 type Props = {};
 
-const Map: FC<Props> = (props: Props) => {
+const Map: FC<PropsWithChildren<Props>> = ({ children }) => {
   const { addressStart, addressDestinationList, setAddresses } =
     useAddressContext();
 
@@ -16,20 +17,22 @@ const Map: FC<Props> = (props: Props) => {
     return { lat: x[0], lng: x[1] };
   };
   const polyLine = decodedPolyLine.map(toLatLng);
-
-  const POLYLINE_OPTIONS = {
-    strokeColor: "#FF0000",
+  const polylineOptions: google.maps.PolylineOptions = {
+    strokeColor: "#f0f",
     strokeOpacity: 1.0,
     strokeWeight: 2,
+    clickable: false,
   };
-  const containerStyle = {
-    width: "400px",
-    height: "400px",
+
+  const containerStyle: CSSProperties = {
+    width: "100vw",
+    height: "100vh",
+    float: "inline-start",
   };
 
   const center = {
-    lat: 55.66221993583325,
-    lng: 12.577998762094255,
+    lat: addressStart.latitude!,
+    lng: addressStart.longitude!,
   };
 
   const { isLoaded } = useJsApiLoader({
@@ -40,10 +43,6 @@ const Map: FC<Props> = (props: Props) => {
   const [map, setMap] = React.useState(null);
 
   const onLoad = React.useCallback(function callback(map: any) {
-    // This is just an example of getting and using the map instance!!! don't just blindly copy!
-    const bounds = new window.google.maps.LatLngBounds(center);
-    map.fitBounds(bounds);
-
     setMap(map);
   }, []);
 
@@ -56,17 +55,21 @@ const Map: FC<Props> = (props: Props) => {
       <GoogleMap
         mapContainerStyle={containerStyle}
         center={center}
-        zoom={10}
+        zoom={18}
         onLoad={onLoad}
         onUnmount={onUnmount}
+        options={{
+          fullscreenControl: false,
+          streetViewControl: false,
+          // clickableIcons: false,
+          disableDefaultUI: true,
+        }}
       >
-        {/* <Polyline options={POLYLINE_OPTIONS} path={polyLine} /> */}
-        {/* Child components, such as markers, info windows, etc. */}
+        {children}
+        <Polyline polylineEncoded={encodedPolyLine} />
+        <Markers polylineEncoded={encodedPolyLine} />
         <></>
       </GoogleMap>
-      <div>
-        <Typography variant="h2">The map</Typography>
-      </div>
     </>
   ) : (
     <></>

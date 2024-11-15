@@ -6,19 +6,9 @@ import { AddressProvider } from "./context/AddressContext";
 function App() {
   return (
     <AddressProvider>
-      <Box sx={{ flexGrow: 1 }}>
-        <Grid container spacing={2}>
-          <Grid size={12}>
-            <Typography variant="h2" component="h1">
-              Route Finder
-            </Typography>
-          </Grid>
-          <Grid size={{ sm: 12, md: 6 }}>
-            <AddressInputForm />
-          </Grid>
-          <Grid size={{ sm: 12, md: 6 }}>{/* <Map /> */}</Grid>
-        </Grid>
-      </Box>
+      <Map>
+        <AddressInputForm />
+      </Map>
     </AddressProvider>
   );
 }

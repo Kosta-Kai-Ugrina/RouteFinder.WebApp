@@ -3,11 +3,12 @@ import React, { FC, useEffect, useState } from "react";
 import { TextField } from "@mui/material";
 
 interface Props {
+  label?: string;
   value: string;
   onPlaceSelected?: (placeSelected: google.maps.places.PlaceResult) => void;
 }
 
-export const SearchBox: FC<Props> = ({ value, onPlaceSelected }) => {
+export const SearchBox: FC<Props> = ({ label, value, onPlaceSelected }) => {
   const [textValue, setTextValue] = useState(value);
   const apiKey = process.env.REACT_APP_GOOGLE_API_KEY;
   const { ref } = usePlacesWidget({
@@ -32,8 +33,10 @@ export const SearchBox: FC<Props> = ({ value, onPlaceSelected }) => {
 
   return (
     <TextField
-      fullWidth
-      color="secondary"
+      sx={{ width: 500, backgroundColor: "#fffd" }}
+      label={label}
+      size="medium"
+      color="primary"
       variant="outlined"
       inputRef={ref}
       value={textValue}

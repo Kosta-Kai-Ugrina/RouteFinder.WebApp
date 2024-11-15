@@ -40,7 +40,15 @@ export const FindRouteButton: FC = () => {
   };
 
   return (
-    <Button color="primary" variant="contained" onClick={makeRequest}>
+    <Button
+      color="primary"
+      variant="contained"
+      size="large"
+      sx={{
+        width: 150,
+      }}
+      onClick={makeRequest}
+    >
       Find Route
     </Button>
   );

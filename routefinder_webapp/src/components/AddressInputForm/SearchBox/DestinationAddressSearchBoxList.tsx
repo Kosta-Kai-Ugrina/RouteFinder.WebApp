@@ -35,6 +35,7 @@ function addressesToSearchBoxes(
   return addressDestinationList.map((_, i) => {
     return (
       <SearchBox
+        label={`Delivery address ${i + 1}`}
         key={`destinationSearchBox${i}`}
         onPlaceSelected={(place) => {
           const address = toAddress(place);
