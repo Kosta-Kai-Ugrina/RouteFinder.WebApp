@@ -4,7 +4,7 @@ import { useAddressContext } from "../../../context/AddressContext";
 import { toAddress } from "./searchBoxUtils";
 
 export const StartAddressSearchBox: FC = () => {
-  const { setAddresses } = useAddressContext();
+  const { addressStart, setAddresses } = useAddressContext();
 
   return (
     <SearchBox
@@ -13,6 +13,7 @@ export const StartAddressSearchBox: FC = () => {
         const address = toAddress(placeSelected);
         setAddresses({ addressStart: address });
       }}
+      value={addressStart.name ?? ""}
     />
   );
 };

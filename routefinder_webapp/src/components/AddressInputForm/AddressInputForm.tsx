@@ -19,14 +19,6 @@ export const AddressInputForm: FC<Props> = (props: Props) => {
   const { addressStart, addressDestinationList, setAddresses } =
     useAddressContext();
 
-  useEffect(() => {
-    console.log("UPDATE addressStart", addressStart);
-  }, [addressStart]);
-
-  useEffect(() => {
-    console.log("UPDATE addressDestinationList", addressDestinationList);
-  }, [addressDestinationList]);
-
   return (
     <Stack spacing={10}>
       <StartAddressSearchBox />

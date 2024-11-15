@@ -16,6 +16,7 @@ interface AddressContextType {
     addressStart?: Address | undefined;
     addressDestinationList?: Address[] | undefined;
   }) => void;
+  updateDestinationAddressAt: (address: Address, index: number) => void;
 }
 
 const AddressContext = createContext<AddressContextType | undefined>(undefined);
@@ -45,18 +46,28 @@ export const AddressProvider: React.FC<AddressProviderProps> = ({
     addressDestinationList?: Address[] | undefined;
   }) => {
     if (route.addressStart !== undefined) {
-      console.log("CALL setAddressStart");
       setAddressStart(route.addressStart);
     }
     if (route.addressDestinationList !== undefined) {
-      console.log("CALL setAddressDestinationList");
       setAddressDestinationList(route.addressDestinationList);
     }
   };
 
+  const updateDestinationAddressAt = (address: Address, index: number) => {
+    setAddressDestinationList((curr) => {
+      curr[index] = address;
+      return [...curr];
+    });
+  };
+
   return (
     <AddressContext.Provider
-      value={{ addressStart, addressDestinationList, setAddresses }}
+      value={{
+        addressStart,
+        addressDestinationList,
+        setAddresses,
+        updateDestinationAddressAt,
+      }}
     >
       {children}
     </AddressContext.Provider>

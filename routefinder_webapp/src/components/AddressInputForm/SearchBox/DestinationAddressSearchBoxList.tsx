@@ -8,13 +8,14 @@ import { Stack } from "@mui/material";
 import { AddRemoveButtonGroup } from "./AddRemoveButtonGroup";
 
 export const DestinationAddressSearchBoxList = () => {
-  const { addressDestinationList, setAddresses } = useAddressContext();
+  const { addressDestinationList, updateDestinationAddressAt } =
+    useAddressContext();
   const [searchBoxList, setSearchBoxList] = useState<ReactNode>([]);
 
   useEffect(() => {
     const searchBoxes = addressesToSearchBoxes(
       addressDestinationList,
-      setAddresses
+      updateDestinationAddressAt
     );
     setSearchBoxList(searchBoxes);
   }, [addressDestinationList]);
@@ -29,10 +30,7 @@ export const DestinationAddressSearchBoxList = () => {
 
 function addressesToSearchBoxes(
   addressDestinationList: Address[],
-  setAddresses: (route: {
-    addressStart?: Address | undefined;
-    addressDestinationList?: Address[] | undefined;
-  }) => void
+  updateDestinationAddressAt: (address: Address, index: number) => void
 ): ReactNode[] {
   return addressDestinationList.map((_, i) => {
     return (
@@ -40,9 +38,9 @@ function addressesToSearchBoxes(
         key={`destinationSearchBox${i}`}
         onPlaceSelected={(place) => {
           const address = toAddress(place);
-          addressDestinationList[i] = address;
-          setAddresses({ addressDestinationList: [...addressDestinationList] });
+          updateDestinationAddressAt(address, i);
         }}
+        value={addressDestinationList[i].name ?? ""}
       />
     );
   });

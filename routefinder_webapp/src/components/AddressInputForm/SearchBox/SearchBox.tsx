@@ -1,31 +1,43 @@
 import Autocomplete, { usePlacesWidget } from "react-google-autocomplete";
-import React, { FC } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { TextField } from "@mui/material";
 
 interface Props {
+  value: string;
   onPlaceSelected?: (placeSelected: google.maps.places.PlaceResult) => void;
 }
 
-export const SearchBox: FC<Props> = (props) => {
+export const SearchBox: FC<Props> = ({ value, onPlaceSelected }) => {
+  const [textValue, setTextValue] = useState(value);
   const apiKey = process.env.REACT_APP_GOOGLE_API_KEY;
   const { ref } = usePlacesWidget({
     apiKey: apiKey,
-    onPlaceSelected: props.onPlaceSelected,
-    inputAutocompleteValue: "country",
+    onPlaceSelected: (place) => {
+      if (
+        place === undefined ||
+        place.formatted_address === undefined ||
+        onPlaceSelected === undefined
+      )
+        return;
+
+      onPlaceSelected(place);
+    },
     options: {
-      componentRestrictions: { country: "dk" },
+      types: ["cafe", "zoo", "street_address"],
+      fields: ["formatted_address", "geometry.location"],
     },
   });
+  const updateTextOnPlaceSelect = () => setTextValue(value);
+  useEffect(updateTextOnPlaceSelect, [value]);
 
   return (
-    <TextField fullWidth color="secondary" variant="outlined" inputRef={ref} />
-  );
-
-  return (
-    <Autocomplete
-      style={{ width: 200, height: 30 }}
-      apiKey={apiKey}
-      {...props}
+    <TextField
+      fullWidth
+      color="secondary"
+      variant="outlined"
+      inputRef={ref}
+      value={textValue}
+      onChange={(e) => setTextValue(e.target.value)}
     />
   );
 };
