@@ -19,7 +19,7 @@ export const Markers: FC<Props> = () => {
         key={`markerDeliveryAddress${index}`}
         icon={{
           url: iconDeliveryAddress,
-          anchor: new google.maps.Point(12, 12),
+          anchor: new google.maps.Point(25, 25),
         }}
         position={pos}
       />
