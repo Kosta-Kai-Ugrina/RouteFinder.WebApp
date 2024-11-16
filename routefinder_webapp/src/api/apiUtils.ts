@@ -1,5 +1,6 @@
 import axios from "axios";
 import { RouteResponse, RouteResponseRaw } from "../types";
+import * as polylineFunctions from "polyline";
 
 async function fetch<T, U>(method: "get" | "post", url: string, data?: T) {
   try {
@@ -21,6 +22,14 @@ export async function post<T, U>(url: string, data: T): Promise<U> {
   return fetch("post", url, data);
 }
 
+export function toPolylinePath(polylineEncoded: string): google.maps.LatLng[] {
+  const polylineDecoded = polylineFunctions.decode(polylineEncoded);
+  const toLatLng = (x: number[]) =>
+    new google.maps.LatLng({ lat: x[0], lng: x[1] });
+  const polyLinePathGoogleFormat = polylineDecoded.map(toLatLng);
+  return polyLinePathGoogleFormat;
+}
+
 export function toRouteResponse(
   routeResponseRaw: RouteResponseRaw
 ): RouteResponse {
@@ -32,7 +41,7 @@ export function toRouteResponse(
   return {
     distanceMeters: distanceMeters,
     duration: parseDuration(duration),
-    polylineEncoded: encodedPolyline,
+    polyline: toPolylinePath(encodedPolyline),
   };
 }
 

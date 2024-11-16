@@ -5,7 +5,8 @@ import { findFastestRoute } from "../../../api/routeFinderApi";
 import { Address } from "../../../types";
 
 export const FindRouteButton: FC = () => {
-  const { addressStart, addressDestinationList } = useAddressContext();
+  const { addressStart, addressDestinationList, setRouteDataResponse } =
+    useAddressContext();
   const makeRequest = () => {
     console.log(
       "attempting find route request with data:",
@@ -36,6 +37,7 @@ export const FindRouteButton: FC = () => {
     result.then((routeData) => {
       console.log("FIND ROUTE RESULT");
       console.log(routeData);
+      setRouteDataResponse(routeData);
     });
   };
 

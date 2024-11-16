@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, ReactNode } from "react";
-import { Address } from "../types";
+import { Address, RouteResponse } from "../types";
 
 const defaultAddressStart: Address = {
   name: "Mover Systems",
@@ -10,6 +10,7 @@ const defaultAddressStart: Address = {
 const defaultDestinationList: Address[] = [{}];
 
 interface AddressContextType {
+  routePolyline: google.maps.LatLng[] | null;
   addressStart: Address;
   addressDestinationList: Address[];
   setAddresses: (route: {
@@ -17,6 +18,7 @@ interface AddressContextType {
     addressDestinationList?: Address[] | undefined;
   }) => void;
   updateDestinationAddressAt: (address: Address, index: number) => void;
+  setRouteDataResponse: (routeData: RouteResponse) => void;
 }
 
 const AddressContext = createContext<AddressContextType | undefined>(undefined);
@@ -36,6 +38,9 @@ interface AddressProviderProps {
 export const AddressProvider: React.FC<AddressProviderProps> = ({
   children,
 }) => {
+  const [routePolyline, setRoutePolyline] = useState<
+    google.maps.LatLng[] | null
+  >(null);
   const [addressStart, setAddressStart] = useState(defaultAddressStart);
   const [addressDestinationList, setAddressDestinationList] = useState(
     defaultDestinationList
@@ -53,6 +58,10 @@ export const AddressProvider: React.FC<AddressProviderProps> = ({
     }
   };
 
+  const setRouteDataResponse = ({ polyline }: RouteResponse) => {
+    setRoutePolyline(polyline);
+  };
+
   const updateDestinationAddressAt = (address: Address, index: number) => {
     setAddressDestinationList((curr) => {
       curr[index] = address;
@@ -63,10 +72,12 @@ export const AddressProvider: React.FC<AddressProviderProps> = ({
   return (
     <AddressContext.Provider
       value={{
+        routePolyline,
         addressStart,
         addressDestinationList,
         setAddresses,
         updateDestinationAddressAt,
+        setRouteDataResponse,
       }}
     >
       {children}

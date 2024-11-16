@@ -2,12 +2,13 @@ import React, { FC } from "react";
 
 import { Polyline as GooglePolyline } from "@react-google-maps/api";
 import { toPolylinePath } from "./polylineUtils";
+import { useAddressContext } from "../../../context/AddressContext";
 
-interface Props {
-  polylineEncoded: string;
-}
+interface Props {}
 
-export const Polyline: FC<Props> = ({ polylineEncoded }) => {
+export const Polyline: FC<Props> = () => {
+  const { routePolyline } = useAddressContext();
+
   const polylineOptions: google.maps.PolylineOptions = {
     strokeColor: "#04f",
     strokeOpacity: 1.0,
@@ -15,7 +16,10 @@ export const Polyline: FC<Props> = ({ polylineEncoded }) => {
     clickable: false,
   };
 
-  const polylinePath = toPolylinePath(polylineEncoded);
-
-  return <GooglePolyline options={polylineOptions} path={polylinePath} />;
+  return (
+    <GooglePolyline
+      options={polylineOptions}
+      path={routePolyline ?? undefined}
+    />
+  );
 };

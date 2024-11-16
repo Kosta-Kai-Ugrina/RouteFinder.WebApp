@@ -76,9 +76,8 @@ const Map: FC<PropsWithChildren<Props>> = ({ children }) => {
         }}
       >
         {children}
-        <Polyline polylineEncoded={encodedPolyLine} />
-        <Markers polylineEncoded={encodedPolyLine} />
-        <></>
+        <Polyline />
+        <Markers />
       </GoogleMap>
     </>
   ) : (

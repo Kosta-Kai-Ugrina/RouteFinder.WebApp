@@ -22,5 +22,5 @@ export interface RouteResponseRaw {
 export interface RouteResponse {
   distanceMeters: number;
   duration: number;
-  polylineEncoded: string;
+  polyline: google.maps.LatLng[];
 }
