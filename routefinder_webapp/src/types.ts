@@ -24,3 +24,21 @@ export interface RouteResponse {
   duration: number;
   polyline: google.maps.LatLng[];
 }
+
+export function validationFail(error: string): RequestValidationResult {
+  return {
+    isValid: false,
+    error,
+  };
+}
+
+export function validationSuccess(): RequestValidationResult {
+  return {
+    isValid: true,
+  };
+}
+
+export interface RequestValidationResult {
+  isValid: boolean;
+  error?: string;
+}

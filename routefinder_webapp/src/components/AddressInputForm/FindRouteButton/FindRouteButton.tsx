@@ -1,80 +1,94 @@
-import { Button } from "@mui/material";
-import React, { FC } from "react";
+import { Button, Tooltip } from "@mui/material";
+import React, { FC, useCallback, useEffect, useState } from "react";
 import { useAddressContext } from "../../../context/AddressContext";
 import { findFastestRoute } from "../../../api/routeFinderApi";
-import { Address } from "../../../types";
+import { Address, RequestValidationResult } from "../../../types";
+import {
+  isAddressValid,
+  validateRequest,
+} from "../../../utils/routeRequestValidation";
+import { AxiosError } from "axios";
 
 export const FindRouteButton: FC = () => {
-  const { addressStart, addressDestinationList, setRouteDataResponse } =
-    useAddressContext();
+  const {
+    error,
+    setError,
+    addressStart,
+    addressDestinationList,
+    setRouteDataResponse,
+  } = useAddressContext();
   const makeRequest = () => {
     setRouteDataResponse(null);
-
-    console.log(
-      "attempting find route request with data:",
-      addressStart,
-      addressDestinationList
-    );
 
     const addressDestinationListFixed = fixDestinationList(
       addressDestinationList
     );
-    const isRequestValid = validateRequest(
+
+    const validationResult = validateRequest(
       addressStart,
-      addressDestinationList
+      addressDestinationListFixed
     );
 
-    if (!isRequestValid) {
-      // panic
-      console.log("Request is invalid");
+    if (!validationResult.isValid) {
+      setError(validationResult.error!);
+      console.log("Request is invalid. Reason: ", validationResult.error);
       return;
     }
 
+    setError(null);
     console.log("Request is valid, attempting request...");
 
     const result = findFastestRoute({
       addressStart,
       addressDestinationList: addressDestinationListFixed,
     });
-    result.then((routeData) => {
-      console.log("FIND ROUTE RESULT");
-      console.log(routeData);
-      setRouteDataResponse(routeData);
-    });
+    result
+      .then((routeData) => {
+        setRouteDataResponse(routeData);
+      })
+      .catch((e) => {
+        if (e instanceof AxiosError) {
+          const axiosError = e as AxiosError;
+          setError(axiosError.message);
+        }
+        console.log("ERROR", e);
+      });
   };
 
+  const [isDataValid, setIsDataValid] = useState(true);
+  useEffect(() => {
+    const validationResult = validateRequest(
+      addressStart,
+      addressDestinationList
+    );
+    setIsDataValid(validationResult.isValid);
+  }, [addressStart, addressDestinationList]);
+
   return (
-    <Button
-      color="primary"
-      variant="contained"
-      size="large"
-      sx={{
-        width: 150,
-      }}
-      onClick={makeRequest}
+    <Tooltip
+      title={isDataValid ? undefined : "Data entered is invalid."}
+      placement="top"
     >
-      Find Route
-    </Button>
+      <div>
+        <Button
+          disabled={!isDataValid}
+          color="primary"
+          variant="contained"
+          size="large"
+          sx={{
+            width: 150,
+          }}
+          onClick={makeRequest}
+        >
+          Find Route
+        </Button>
+      </div>
+    </Tooltip>
   );
 };
 
 function fixDestinationList(addressDestinationList: Address[]): Address[] {
-  const fixed = addressDestinationList.filter(addressValid);
+  const fixed = addressDestinationList.filter(isAddressValid);
 
   return fixed;
-}
-
-function validateRequest(
-  addressStart: Address,
-  addressDestinationList: Address[]
-): boolean {
-  return (
-    addressValid(addressStart) &&
-    addressDestinationList.length > 0 &&
-    addressDestinationList.every(addressValid)
-  );
-}
-
-function addressValid(address: Address): boolean {
-  return address.latitude !== undefined && address.longitude !== undefined;
 }

@@ -10,17 +10,19 @@ const defaultAddressStart: Address = {
 const defaultDestinationList: Address[] = [{}];
 
 interface AddressContextType {
+  error: string | null;
   routePolyline: google.maps.LatLng[] | null;
   duration: number | null;
   distanceMeters: number | null;
   addressStart: Address;
   addressDestinationList: Address[];
+  setError: (error: string | null) => void;
+  setRouteDataResponse: (routeData: RouteResponse | null) => void;
   setAddresses: (route: {
     addressStart?: Address | undefined;
     addressDestinationList?: Address[] | undefined;
   }) => void;
   updateDestinationAddressAt: (address: Address, index: number) => void;
-  setRouteDataResponse: (routeData: RouteResponse | null) => void;
 }
 
 const AddressContext = createContext<AddressContextType | undefined>(undefined);
@@ -40,6 +42,7 @@ interface AddressProviderProps {
 export const AddressProvider: React.FC<AddressProviderProps> = ({
   children,
 }) => {
+  const [error, setError] = useState<string | null>(null);
   const [routePolyline, setRoutePolyline] = useState<
     google.maps.LatLng[] | null
   >(null);
@@ -55,20 +58,24 @@ export const AddressProvider: React.FC<AddressProviderProps> = ({
     addressDestinationList?: Address[] | undefined;
   }) => {
     if (route.addressStart !== undefined) {
+      setError(null);
       setAddressStart(route.addressStart);
     }
     if (route.addressDestinationList !== undefined) {
+      setError(null);
       setAddressDestinationList(route.addressDestinationList);
     }
   };
 
   const setRouteDataResponse = (routeData: RouteResponse | null) => {
+    setError(null);
     setRoutePolyline(routeData?.polyline ?? null);
     setDuration(routeData?.duration ?? null);
     setDistanceMeters(routeData?.distanceMeters ?? null);
   };
 
   const updateDestinationAddressAt = (address: Address, index: number) => {
+    setError(null);
     setAddressDestinationList((curr) => {
       curr[index] = address;
       return [...curr];
@@ -78,14 +85,16 @@ export const AddressProvider: React.FC<AddressProviderProps> = ({
   return (
     <AddressContext.Provider
       value={{
+        error,
         routePolyline,
         duration,
         distanceMeters,
         addressStart,
         addressDestinationList,
+        setError,
+        setRouteDataResponse,
         setAddresses,
         updateDestinationAddressAt,
-        setRouteDataResponse,
       }}
     >
       {children}
