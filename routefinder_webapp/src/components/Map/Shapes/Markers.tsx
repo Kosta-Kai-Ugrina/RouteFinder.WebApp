@@ -11,13 +11,33 @@ type Props = {
 export const Markers: FC<Props> = ({ polylineEncoded }) => {
   const polylinePath = toPolylinePath(polylineEncoded);
   const [firstNode, ...remainingNodes] = polylinePath;
-  const toDeliveryAddressMarker = (pos: google.maps.LatLng) => (
-    <Marker icon={iconDeliveryAddress} position={pos} />
-  );
+  // google.maps.marker.AdvancedMarkerElement
+  // const options: google.maps.MarkerOptions = {
+  //   anchorPoint: new google.maps.Point(50, 300),
+  // };
 
+  const toDeliveryAddressMarker = (pos: google.maps.LatLng, index: number) => {
+    return (
+      <Marker
+        key={`markerDeliveryAddress${index}`}
+        icon={{
+          url: iconDeliveryAddress,
+          anchor: new google.maps.Point(12, 12),
+        }}
+        position={pos}
+      />
+    );
+  };
   return (
     <>
-      <Marker position={firstNode} icon={iconWarehouse} />
+      <Marker
+        key="markerStart"
+        position={firstNode}
+        icon={{
+          url: iconWarehouse,
+          anchor: new google.maps.Point(12, 12),
+        }}
+      />
       {remainingNodes.map(toDeliveryAddressMarker)}
     </>
   );

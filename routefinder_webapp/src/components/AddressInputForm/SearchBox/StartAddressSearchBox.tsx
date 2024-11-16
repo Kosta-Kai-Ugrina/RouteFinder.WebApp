@@ -1,28 +1,32 @@
-import React, { FC } from "react";
+import React, { CSSProperties, FC } from "react";
 import { SearchBox } from "./SearchBox";
 import { useAddressContext } from "../../../context/AddressContext";
 import { toAddress } from "./searchBoxUtils";
 import { Stack } from "@mui/material";
 import iconWarehouse from "../../../assets/iconWarehouse.svg";
-import { ReactComponent as YourSvg } from "../../../assets/iconWarehouse.svg";
+import { ReactComponent as Icon } from "../../../assets/iconWarehouse.svg";
 
 export const StartAddressSearchBox: FC = () => {
   const { addressStart, setAddresses } = useAddressContext();
 
+  const borderStyle: CSSProperties = {
+    borderStyle: "solid",
+    borderWidth: 5,
+    borderColor: "red",
+  };
+
+  const iconSize = 40;
+
   return (
-    <Stack direction="row">
-      {/* <div
-        style={{
-          width: 60,
-          height: 60,
-          padding: 10,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <YourSvg width={30} height={30} />
-      </div> */}
+    <Stack
+      spacing={2}
+      sx={{
+        display: "flex",
+        alignItems: "center",
+      }}
+      direction="row"
+    >
+      <Icon width={iconSize} height={iconSize} />
       <SearchBox
         key="searchBoxStartAddress"
         onPlaceSelected={(placeSelected) => {

@@ -1,4 +1,11 @@
-import { Autocomplete, Button, Paper, Stack, TextField } from "@mui/material";
+import {
+  Autocomplete,
+  Box,
+  Button,
+  Paper,
+  Stack,
+  TextField,
+} from "@mui/material";
 import React, { FC, useEffect, useState } from "react";
 import { useAddressContext } from "../../context/AddressContext";
 import {
@@ -16,17 +23,15 @@ import { FindRouteButton } from "./FindRouteButton/FindRouteButton";
 type Props = {};
 
 export const AddressInputForm: FC<Props> = (props: Props) => {
-  const { addressStart, addressDestinationList, setAddresses } =
-    useAddressContext();
-
   return (
     <Paper
-      elevation={12}
-      style={{
-        float: "left",
-        padding: 30,
-        backgroundColor: "#ddd4",
-        width: "30%",
+      elevation={4}
+      sx={{
+        position: "absolute",
+        zIndex: "1000",
+        backgroundColor: "#0005",
+        padding: 2,
+        margin: 2,
       }}
     >
       <Stack spacing={5}>
