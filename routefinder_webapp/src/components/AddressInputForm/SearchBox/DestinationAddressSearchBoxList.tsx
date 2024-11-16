@@ -3,7 +3,6 @@ import { SearchBox } from "./SearchBox";
 import { toAddress } from "./searchBoxUtils";
 import { useAddressContext } from "../../../context/AddressContext";
 import { Address } from "../../../types";
-import { Search } from "@mui/icons-material";
 import { Stack } from "@mui/material";
 import { AddRemoveButtonGroup } from "./AddRemoveButtonGroup";
 import { ReactComponent as Icon } from "../../../assets/iconDeliveryAddress.svg";

@@ -24,7 +24,7 @@ export const SearchBox: FC<Props> = ({ label, value, onPlaceSelected }) => {
       onPlaceSelected(place);
     },
     options: {
-      // types: ["cafe", "zoo", "street_address"],
+      // types: ["cities"],
       fields: ["formatted_address", "geometry.location"],
     },
   });

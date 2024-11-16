@@ -46,9 +46,7 @@ export function toRouteResponse(
 }
 
 function parseDuration(durationRaw: string): number {
-  console.log("duration string", durationRaw);
   const timeUnitRemoved = durationRaw.substring(0, durationRaw.length - 1);
-  console.log("time unit removed", timeUnitRemoved);
   const durationNumber = parseInt(timeUnitRemoved);
   return durationNumber;
 }

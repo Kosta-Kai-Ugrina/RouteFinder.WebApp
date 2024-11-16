@@ -37,10 +37,6 @@ const Map: FC<PropsWithChildren<Props>> = ({ children }) => {
     setMap(null);
   }, []);
 
-  useEffect(() => {
-    console.log(map);
-  }, [addressStart, addressDestinationList]);
-
   return isLoaded ? (
     <>
       <GoogleMap

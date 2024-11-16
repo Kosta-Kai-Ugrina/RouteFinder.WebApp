@@ -44,35 +44,4 @@ export const AddRemoveButtonGroup: FC = () => {
       </Tooltip>
     </ButtonGroup>
   );
-
-  return (
-    <Stack spacing={1}>
-      <ButtonGroup variant="contained">
-        <Button>
-          <AddIcon />
-        </Button>
-      </ButtonGroup>
-      <Tooltip placement="right" title="Add delivery address">
-        <Fab color="primary" size="small" onClick={addAddress}>
-          <AddIcon />
-        </Fab>
-      </Tooltip>
-      <Tooltip
-        disableHoverListener={addressDestinationList.length <= 1}
-        placement="right"
-        title="Remove delivery address"
-      >
-        <div>
-          <Fab
-            disabled={addressDestinationList.length <= 1}
-            color="primary"
-            size="small"
-            onClick={removeAddress}
-          >
-            <RemoveIcon />
-          </Fab>
-        </div>
-      </Tooltip>
-    </Stack>
-  );
 };
