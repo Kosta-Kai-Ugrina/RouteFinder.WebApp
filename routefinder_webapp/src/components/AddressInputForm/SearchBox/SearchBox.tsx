@@ -1,4 +1,4 @@
-import Autocomplete, { usePlacesWidget } from "react-google-autocomplete";
+import { usePlacesWidget } from "react-google-autocomplete";
 import React, { FC, useEffect, useState } from "react";
 import { TextField } from "@mui/material";
 
@@ -24,7 +24,7 @@ export const SearchBox: FC<Props> = ({ label, value, onPlaceSelected }) => {
       onPlaceSelected(place);
     },
     options: {
-      types: ["cafe", "zoo", "street_address"],
+      // types: ["cafe", "zoo", "street_address"],
       fields: ["formatted_address", "geometry.location"],
     },
   });
@@ -33,9 +33,9 @@ export const SearchBox: FC<Props> = ({ label, value, onPlaceSelected }) => {
 
   return (
     <TextField
-      sx={{ width: 500, backgroundColor: "#fffd" }}
-      label={label}
-      size="medium"
+      style={{ width: 500, backgroundColor: "#fffc", borderRadius: "5px" }}
+      // label={label}
+      size="small"
       color="primary"
       variant="outlined"
       inputRef={ref}

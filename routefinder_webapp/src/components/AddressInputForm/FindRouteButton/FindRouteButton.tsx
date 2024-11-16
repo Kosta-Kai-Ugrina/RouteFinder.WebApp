@@ -8,6 +8,8 @@ export const FindRouteButton: FC = () => {
   const { addressStart, addressDestinationList, setRouteDataResponse } =
     useAddressContext();
   const makeRequest = () => {
+    setRouteDataResponse(null);
+
     console.log(
       "attempting find route request with data:",
       addressStart,

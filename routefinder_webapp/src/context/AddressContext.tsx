@@ -11,6 +11,8 @@ const defaultDestinationList: Address[] = [{}];
 
 interface AddressContextType {
   routePolyline: google.maps.LatLng[] | null;
+  duration: number | null;
+  distanceMeters: number | null;
   addressStart: Address;
   addressDestinationList: Address[];
   setAddresses: (route: {
@@ -18,7 +20,7 @@ interface AddressContextType {
     addressDestinationList?: Address[] | undefined;
   }) => void;
   updateDestinationAddressAt: (address: Address, index: number) => void;
-  setRouteDataResponse: (routeData: RouteResponse) => void;
+  setRouteDataResponse: (routeData: RouteResponse | null) => void;
 }
 
 const AddressContext = createContext<AddressContextType | undefined>(undefined);
@@ -41,6 +43,8 @@ export const AddressProvider: React.FC<AddressProviderProps> = ({
   const [routePolyline, setRoutePolyline] = useState<
     google.maps.LatLng[] | null
   >(null);
+  const [duration, setDuration] = useState<number | null>(null);
+  const [distanceMeters, setDistanceMeters] = useState<number | null>(null);
   const [addressStart, setAddressStart] = useState(defaultAddressStart);
   const [addressDestinationList, setAddressDestinationList] = useState(
     defaultDestinationList
@@ -58,8 +62,10 @@ export const AddressProvider: React.FC<AddressProviderProps> = ({
     }
   };
 
-  const setRouteDataResponse = ({ polyline }: RouteResponse) => {
-    setRoutePolyline(polyline);
+  const setRouteDataResponse = (routeData: RouteResponse | null) => {
+    setRoutePolyline(routeData?.polyline ?? null);
+    setDuration(routeData?.duration ?? null);
+    setDistanceMeters(routeData?.distanceMeters ?? null);
   };
 
   const updateDestinationAddressAt = (address: Address, index: number) => {
@@ -73,6 +79,8 @@ export const AddressProvider: React.FC<AddressProviderProps> = ({
     <AddressContext.Provider
       value={{
         routePolyline,
+        duration,
+        distanceMeters,
         addressStart,
         addressDestinationList,
         setAddresses,
