@@ -1,4 +1,5 @@
 import axios from "axios";
+import { RouteResponse, RouteResponseRaw } from "../types";
 
 async function fetch<T, U>(method: "get" | "post", url: string, data?: T) {
   try {
@@ -18,4 +19,27 @@ export async function get<T, U>(url: string): Promise<U> {
 
 export async function post<T, U>(url: string, data: T): Promise<U> {
   return fetch("post", url, data);
+}
+
+export function toRouteResponse(
+  routeResponseRaw: RouteResponseRaw
+): RouteResponse {
+  const {
+    distanceMeters,
+    duration,
+    polyline: { encodedPolyline },
+  } = routeResponseRaw.routes[0];
+  return {
+    distanceMeters: distanceMeters,
+    duration: parseDuration(duration),
+    polylineEncoded: encodedPolyline,
+  };
+}
+
+function parseDuration(durationRaw: string): number {
+  console.log("duration string", durationRaw);
+  const timeUnitRemoved = durationRaw.substring(0, durationRaw.length - 1);
+  console.log("time unit removed", timeUnitRemoved);
+  const durationNumber = parseInt(timeUnitRemoved);
+  return durationNumber;
 }

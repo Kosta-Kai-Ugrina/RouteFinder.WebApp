@@ -1,20 +1,5 @@
-import {
-  Autocomplete,
-  Box,
-  Button,
-  Paper,
-  Stack,
-  TextField,
-} from "@mui/material";
-import React, { FC, useEffect, useState } from "react";
-import { useAddressContext } from "../../context/AddressContext";
-import {
-  findFastestRoute,
-  testConnection,
-  testOptimizeWrongRoute1,
-  testOptimizeWrongRoute2,
-} from "../../api/routeFinderApi";
-import { SearchBox } from "./SearchBox/SearchBox";
+import { Paper, Stack } from "@mui/material";
+import React, { FC } from "react";
 import { TestButtons } from "./TestButtons/TestButtons";
 import { StartAddressSearchBox } from "./SearchBox/StartAddressSearchBox";
 import { DestinationAddressSearchBoxList } from "./SearchBox/DestinationAddressSearchBoxList";

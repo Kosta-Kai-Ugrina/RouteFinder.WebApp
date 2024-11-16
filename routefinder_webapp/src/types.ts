@@ -8,3 +8,19 @@ export interface RouteRequest {
   addressStart: Address;
   addressDestinationList: Address[];
 }
+
+export interface RouteResponseRaw {
+  routes: [
+    {
+      distanceMeters: number;
+      duration: string;
+      polyline: { encodedPolyline: string };
+    }
+  ];
+}
+
+export interface RouteResponse {
+  distanceMeters: number;
+  duration: number;
+  polylineEncoded: string;
+}
