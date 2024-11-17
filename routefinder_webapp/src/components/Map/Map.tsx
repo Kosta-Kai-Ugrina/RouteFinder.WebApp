@@ -1,26 +1,34 @@
 import { GoogleMap, OverlayView, useJsApiLoader } from "@react-google-maps/api";
-import React, { CSSProperties, FC, PropsWithChildren, useEffect } from "react";
+import React, {
+  CSSProperties,
+  FC,
+  PropsWithChildren,
+  useEffect,
+  useMemo,
+} from "react";
 import { useAddressContext } from "../../context/AddressContext";
-import { Polyline } from "./Shapes/Polyline";
-import { Markers } from "./Shapes/Markers";
+import { Polyline } from "./Polyline/Polyline";
+import { Markers } from "./Markers/Markers";
 
 const parser = new DOMParser();
 
 type Props = {};
 
 const Map: FC<PropsWithChildren<Props>> = ({ children }) => {
-  const { addressStart, addressDestinationList, routePolyline } =
-    useAddressContext();
+  const { addressStart } = useAddressContext();
 
   const containerStyle: CSSProperties = {
     width: "100vw",
     height: "100vh",
   };
 
-  const center = {
-    lat: addressStart.latitude!,
-    lng: addressStart.longitude!,
-  };
+  const center = useMemo(
+    () => ({
+      lat: addressStart.latitude!,
+      lng: addressStart.longitude!,
+    }),
+    [addressStart]
+  );
 
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",

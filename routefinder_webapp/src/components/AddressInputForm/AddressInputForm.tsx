@@ -1,8 +1,8 @@
 import { Paper, Stack } from "@mui/material";
 import React, { FC } from "react";
 import { TestButtons } from "./TestButtons/TestButtons";
-import { StartAddressSearchBox } from "./SearchBox/StartAddressSearchBox";
-import { DestinationAddressSearchBoxList } from "./SearchBox/DestinationAddressSearchBoxList";
+import { StartAddressSearchBox } from "./StartAddressSearchBox/StartAddressSearchBox";
+import { DestinationAddressSearchBoxList } from "./DestinationAddressSearchBoxList/DestinationAddressSearchBoxList";
 import { FindRouteButton } from "./FindRouteButton/FindRouteButton";
 import { RouteStatistics } from "./RouteStatistics/RouteStatistics";
 import { useAddressContext } from "../../context/AddressContext";
