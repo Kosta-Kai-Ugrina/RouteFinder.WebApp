@@ -19,6 +19,8 @@ const Map: FC<PropsWithChildren<Props>> = ({ children }) => {
     streetViewControl: false,
     clickableIcons: false,
     disableDefaultUI: true,
+    minZoom: 3,
+    maxZoom: 20,
   };
 
   return isLoaded ? (
