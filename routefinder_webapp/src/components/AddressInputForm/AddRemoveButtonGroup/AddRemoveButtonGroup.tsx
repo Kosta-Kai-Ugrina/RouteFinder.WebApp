@@ -4,23 +4,16 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import React, { FC } from "react";
 import { useAddressContext } from "../../../context/AddressContext";
 import { Address } from "../../../types";
+import styles from "./AddRemoveButtonGroup.module.scss";
+import { useAddRemoveButtonGroup } from "./hooks/useAddRemoveButtonGroup";
 
 export const AddRemoveButtonGroup: FC = () => {
-  const { addressDestinationList, setAddresses } = useAddressContext();
-  const isMinimumAmountOfAddresses = addressDestinationList.length <= 1;
-  const addAddress = () => {
-    const newAddress: Address = {};
-    addressDestinationList.push(newAddress);
-    setAddresses({ addressDestinationList: [...addressDestinationList] });
-  };
-  const removeAddress = () => {
-    addressDestinationList.pop();
-    setAddresses({ addressDestinationList: [...addressDestinationList] });
-  };
+  const { addAddress, removeAddress, isMinimumAmountOfAddresses } =
+    useAddRemoveButtonGroup();
 
   return (
     <ButtonGroup
-      sx={{ height: "100%" }}
+      className={styles.container}
       orientation="vertical"
       size="small"
       variant="contained"

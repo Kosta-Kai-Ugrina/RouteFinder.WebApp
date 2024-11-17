@@ -1,57 +1,25 @@
 import React, { FC } from "react";
-import { Marker } from "@react-google-maps/api";
 import iconWarehouse from "../../../assets/iconWarehouse.svg";
 import iconDeliveryAddress from "../../../assets/iconDeliveryAddress.svg";
 import { useAddressContext } from "../../../context/AddressContext";
 import { Address } from "../../../types";
+import { toLatLng } from "../../../utils/generalUtils";
+import { Marker } from "./Marker";
 
-type Props = {};
-
-export const Markers: FC<Props> = () => {
+export const Markers: FC = () => {
   const { addressStart, addressDestinationList } = useAddressContext();
   const addressStartLatLng = toLatLng(addressStart);
-  const toDeliveryAddressMarker = (address: Address, index: number) => {
-    const pos = toLatLng(address);
-    return pos === null ? (
-      <></>
-    ) : (
-      <Marker
-        key={`markerDeliveryAddress${index}`}
-        icon={{
-          url: iconDeliveryAddress,
-          anchor: new google.maps.Point(25, 25),
-        }}
-        position={pos}
-      />
-    );
-  };
 
   return (
     <>
-      {addressStartLatLng === null ? (
-        <></>
-      ) : (
+      <Marker key="markerStart" pos={addressStartLatLng} icon="warehouse" />
+      {addressDestinationList.map((addr, i) => (
         <Marker
-          key="markerStart"
-          position={addressStartLatLng!}
-          icon={{
-            url: iconWarehouse,
-            anchor: new google.maps.Point(12, 12),
-          }}
+          key={`markerDest${i}`}
+          icon="deliveryAddress"
+          pos={toLatLng(addr)}
         />
-      )}
-      {addressDestinationList.map(toDeliveryAddressMarker)}
+      ))}
     </>
   );
 };
-
-function toLatLng(address: Address): google.maps.LatLng | null {
-  if (address.latitude === undefined || address.latitude === undefined) {
-    return null;
-  }
-
-  return new google.maps.LatLng({
-    lat: address.latitude!,
-    lng: address.longitude!,
-  });
-}

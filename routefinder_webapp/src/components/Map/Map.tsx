@@ -1,73 +1,42 @@
-import { GoogleMap, OverlayView, useJsApiLoader } from "@react-google-maps/api";
-import React, {
-  CSSProperties,
-  FC,
-  PropsWithChildren,
-  useEffect,
-  useMemo,
-} from "react";
-import { useAddressContext } from "../../context/AddressContext";
+import { GoogleMap } from "@react-google-maps/api";
+import React, { CSSProperties, FC, memo, PropsWithChildren } from "react";
 import { Polyline } from "./Polyline/Polyline";
 import { Markers } from "./Markers/Markers";
+import { useMap } from "./hooks/useMap";
 
-const parser = new DOMParser();
-
-type Props = {};
+interface Props {}
 
 const Map: FC<PropsWithChildren<Props>> = ({ children }) => {
-  const { addressStart } = useAddressContext();
+  const { center, isLoaded, onLoad, onUnmount } = useMap();
 
   const containerStyle: CSSProperties = {
     width: "100vw",
     height: "100vh",
   };
 
-  const center = useMemo(
-    () => ({
-      lat: addressStart.latitude!,
-      lng: addressStart.longitude!,
-    }),
-    [addressStart]
-  );
-
-  const { isLoaded } = useJsApiLoader({
-    id: "google-map-script",
-    googleMapsApiKey: process.env.REACT_APP_GOOGLE_API_KEY as string,
-  });
-
-  const [map, setMap] = React.useState(null);
-
-  const onLoad = React.useCallback(function callback(map: any) {
-    setMap(map);
-  }, []);
-
-  const onUnmount = React.useCallback(function callback(map: any) {
-    setMap(null);
-  }, []);
+  const mapOptions: google.maps.MapOptions = {
+    fullscreenControl: false,
+    streetViewControl: false,
+    clickableIcons: false,
+    disableDefaultUI: true,
+  };
 
   return isLoaded ? (
-    <>
-      <GoogleMap
-        mapContainerStyle={containerStyle}
-        center={center}
-        zoom={18}
-        onLoad={onLoad}
-        onUnmount={onUnmount}
-        options={{
-          fullscreenControl: false,
-          streetViewControl: false,
-          clickableIcons: false,
-          disableDefaultUI: true,
-        }}
-      >
-        {children}
-        <Polyline />
-        <Markers />
-      </GoogleMap>
-    </>
+    <GoogleMap
+      mapContainerStyle={containerStyle}
+      center={center}
+      zoom={18}
+      onLoad={onLoad}
+      onUnmount={onUnmount}
+      options={mapOptions}
+    >
+      {children}
+      <Polyline />
+      <Markers />
+    </GoogleMap>
   ) : (
     <></>
   );
 };
 
-export default React.memo(Map);
+export default memo(Map);

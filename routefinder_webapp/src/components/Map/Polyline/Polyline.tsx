@@ -2,9 +2,7 @@ import React, { FC } from "react";
 import { Polyline as GooglePolyline } from "@react-google-maps/api";
 import { useAddressContext } from "../../../context/AddressContext";
 
-interface Props {}
-
-export const Polyline: FC<Props> = () => {
+export const Polyline: FC = () => {
   const { routePolyline } = useAddressContext();
 
   const polylineOptions: google.maps.PolylineOptions = {

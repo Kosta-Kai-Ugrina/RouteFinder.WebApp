@@ -42,3 +42,5 @@ export interface RequestValidationResult {
   isValid: boolean;
   error?: string;
 }
+
+export type IconType = "warehouse" | "deliveryAddress";

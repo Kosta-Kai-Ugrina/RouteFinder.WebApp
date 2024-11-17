@@ -1,44 +1,33 @@
 import { usePlacesWidget } from "react-google-autocomplete";
 import React, { FC, useEffect, useState } from "react";
 import { TextField } from "@mui/material";
+import styles from "./SearchBox.module.scss";
+import { useSearchBox } from "./hooks/useSearchBox";
 
-interface Props {
+export interface SearchBoxProps {
   label?: string;
   value: string;
   onPlaceSelected?: (placeSelected: google.maps.places.PlaceResult) => void;
 }
 
-export const SearchBox: FC<Props> = ({ label, value, onPlaceSelected }) => {
-  const [textValue, setTextValue] = useState(value);
-  const apiKey = process.env.REACT_APP_GOOGLE_API_KEY;
-  const { ref } = usePlacesWidget({
-    apiKey: apiKey,
-    onPlaceSelected: (place) => {
-      if (
-        place === undefined ||
-        place.formatted_address === undefined ||
-        onPlaceSelected === undefined
-      )
-        return;
-
-      onPlaceSelected(place);
-    },
-    options: {
-      // types: ["cities"],
-      fields: ["formatted_address", "geometry.location"],
-    },
+export const SearchBox: FC<SearchBoxProps> = ({
+  label,
+  value,
+  onPlaceSelected,
+}) => {
+  const { placeWidgetRef, setTextValue, textValue } = useSearchBox({
+    value,
+    onPlaceSelected,
   });
-  const updateTextOnPlaceSelect = () => setTextValue(value);
-  useEffect(updateTextOnPlaceSelect, [value]);
 
   return (
     <TextField
-      style={{ width: 500, backgroundColor: "#fffc", borderRadius: "5px" }}
+      className={styles.textfield}
       // label={label}
       size="small"
       color="primary"
       variant="outlined"
-      inputRef={ref}
+      inputRef={placeWidgetRef}
       value={textValue}
       onChange={(e) => setTextValue(e.target.value)}
     />

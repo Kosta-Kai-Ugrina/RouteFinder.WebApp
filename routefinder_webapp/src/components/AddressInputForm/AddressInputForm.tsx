@@ -7,23 +7,13 @@ import { FindRouteButton } from "./FindRouteButton/FindRouteButton";
 import { RouteStatistics } from "./RouteStatistics/RouteStatistics";
 import { useAddressContext } from "../../context/AddressContext";
 import { ErrorInfo } from "./ErrorInfo/ErrorInfo";
+import styles from "./AddressInputForm.module.scss";
 
-type Props = {};
-
-export const AddressInputForm: FC<Props> = (props: Props) => {
+export const AddressInputForm: FC = () => {
   const { error } = useAddressContext();
 
   return (
-    <Paper
-      elevation={12}
-      sx={{
-        position: "absolute",
-        zIndex: "1000",
-        backgroundColor: "#000a",
-        padding: 2,
-        margin: 2,
-      }}
-    >
+    <Paper elevation={12} className={styles.container}>
       <Stack spacing={5}>
         <StartAddressSearchBox />
         <DestinationAddressSearchBoxList />
