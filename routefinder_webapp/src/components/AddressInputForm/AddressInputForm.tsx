@@ -8,6 +8,7 @@ import { RouteStatistics } from "./RouteStatistics/RouteStatistics";
 import { useAddressContext } from "../../context/AddressContext";
 import { ErrorInfo } from "./ErrorInfo/ErrorInfo";
 import styles from "./AddressInputForm.module.scss";
+import { FetchProgressBar } from "./FetchProgressBar/FetchProgressBar";
 
 export const AddressInputForm: FC = () => {
   const { error } = useAddressContext();
@@ -22,6 +23,7 @@ export const AddressInputForm: FC = () => {
           {error === null ? <RouteStatistics /> : <ErrorInfo />}
         </Stack>
         {/* <TestButtons /> */}
+        <FetchProgressBar />
       </Stack>
     </Paper>
   );

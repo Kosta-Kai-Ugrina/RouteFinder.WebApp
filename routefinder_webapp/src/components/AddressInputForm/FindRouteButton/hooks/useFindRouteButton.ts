@@ -10,6 +10,8 @@ import { Address } from "../../../../types";
 
 export const useFindRouteButton = () => {
   const {
+    isFetching,
+    setIsFetching,
     error,
     setError,
     addressStart,
@@ -17,6 +19,7 @@ export const useFindRouteButton = () => {
     setRouteDataResponse,
   } = useAddressContext();
   const makeRequest = () => {
+    setIsFetching(true);
     setRouteDataResponse(null);
 
     const addressDestinationListFixed = fixDestinationList(
@@ -31,6 +34,7 @@ export const useFindRouteButton = () => {
     if (!validationResult.isValid) {
       setError(validationResult.error!);
       console.log("Request is invalid. Reason: ", validationResult.error);
+      setIsFetching(false);
       return;
     }
 
@@ -44,6 +48,7 @@ export const useFindRouteButton = () => {
     result
       .then((routeData) => {
         setRouteDataResponse(routeData);
+        setIsFetching(false);
       })
       .catch((e) => {
         if (e instanceof AxiosError) {
@@ -63,7 +68,7 @@ export const useFindRouteButton = () => {
     setIsDataValid(validationResult.isValid);
   }, [addressStart, addressDestinationList]);
 
-  return { isDataValid, makeRequest };
+  return { isDataValid, makeRequest, isFetching };
 };
 
 function fixDestinationList(addressDestinationList: Address[]): Address[] {

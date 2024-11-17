@@ -10,12 +10,14 @@ const defaultAddressStart: Address = {
 const defaultDestinationList: Address[] = [{}];
 
 interface AddressContextType {
+  isFetching: boolean;
   error: string | null;
   routePolyline: google.maps.LatLng[] | null;
   duration: number | null;
   distanceMeters: number | null;
   addressStart: Address;
   addressDestinationList: Address[];
+  setIsFetching: (value: boolean) => void;
   setError: (error: string | null) => void;
   setRouteDataResponse: (routeData: RouteResponse | null) => void;
   setAddresses: (route: {
@@ -42,6 +44,7 @@ interface AddressProviderProps {
 export const AddressProvider: React.FC<AddressProviderProps> = ({
   children,
 }) => {
+  const [isFetching, setIsFetching] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [routePolyline, setRoutePolyline] = useState<
     google.maps.LatLng[] | null
@@ -85,12 +88,14 @@ export const AddressProvider: React.FC<AddressProviderProps> = ({
   return (
     <AddressContext.Provider
       value={{
+        isFetching,
         error,
         routePolyline,
         duration,
         distanceMeters,
         addressStart,
         addressDestinationList,
+        setIsFetching,
         setError,
         setRouteDataResponse,
         setAddresses,

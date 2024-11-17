@@ -3,7 +3,7 @@ import React, { FC } from "react";
 import { useFindRouteButton } from "./hooks/useFindRouteButton";
 
 export const FindRouteButton: FC = () => {
-  const { isDataValid, makeRequest } = useFindRouteButton();
+  const { isDataValid, makeRequest, isFetching } = useFindRouteButton();
 
   return (
     <Tooltip
@@ -12,7 +12,7 @@ export const FindRouteButton: FC = () => {
     >
       <div>
         <Button
-          disabled={!isDataValid}
+          disabled={!isDataValid || isFetching}
           color="primary"
           variant="contained"
           size="large"
