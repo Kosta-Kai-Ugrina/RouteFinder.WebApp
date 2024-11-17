@@ -53,7 +53,7 @@ export const useFindRouteButton = () => {
         if (routeData === null) {
           setRouteDataResponse(null);
           setError(
-            "Couldn't find the requested route. Try using other destinations. Ideally connected by land."
+            "Couldn't find the requested route. The reason could be an impossible route (e.g. car crossing the ocean without a ferry) or the Google API is not responding."
           );
           return;
         }

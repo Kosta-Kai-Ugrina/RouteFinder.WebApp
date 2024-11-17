@@ -19,7 +19,7 @@ export async function findFastestRoute(
     routeRequest
   );
   console.log(data);
-  if (data.routes === null) return null;
+  if (data === null || data.routes === null) return null;
 
   const dataFormatted = toRouteResponse(data);
   return dataFormatted;

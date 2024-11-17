@@ -22,7 +22,7 @@ export const useSearchBox = ({ value, onPlaceSelected }: Props) => {
       onPlaceSelected(place);
     },
     options: {
-      // types: ["cities"],
+      types: ["establishment"],
       fields: ["formatted_address", "geometry.location"],
     },
   });
