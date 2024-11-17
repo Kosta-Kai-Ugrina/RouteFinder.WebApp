@@ -9,6 +9,8 @@ interface Props {
   icon: IconType;
 }
 
+const OFFSET = 20;
+
 export const Marker: FC<Props> = ({ pos, icon }) => {
   return pos === null ? (
     <></>
@@ -16,7 +18,7 @@ export const Marker: FC<Props> = ({ pos, icon }) => {
     <GoogleMarker
       icon={{
         url: icon === "warehouse" ? iconWarehouse : iconDeliveryAddress,
-        anchor: new google.maps.Point(25, 25),
+        anchor: new google.maps.Point(OFFSET, OFFSET),
       }}
       position={pos}
     />
