@@ -12,7 +12,7 @@ If the link doesn't work, try copy-pasting this URL into your browser:
 
 https://lively-sky-028740303.5.azurestaticapps.net
 
-If that doesn't work
+If that doesn't work, contact me at kkugrina@gmail.com.
 
 ## Local startup
 
