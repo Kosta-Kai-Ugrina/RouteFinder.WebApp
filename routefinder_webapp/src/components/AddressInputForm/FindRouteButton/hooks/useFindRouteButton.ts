@@ -47,8 +47,17 @@ export const useFindRouteButton = () => {
     });
     result
       .then((routeData) => {
-        setRouteDataResponse(routeData);
+        console.log("enter result.then of FindROuteButton");
+
         setIsFetching(false);
+        if (routeData === null) {
+          setRouteDataResponse(null);
+          setError(
+            "Couldn't find the requested route. Try using other destinations. Ideally connected by land."
+          );
+          return;
+        }
+        setRouteDataResponse(routeData);
       })
       .catch((e) => {
         if (e instanceof AxiosError) {

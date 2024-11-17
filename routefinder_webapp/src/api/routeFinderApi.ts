@@ -11,11 +11,16 @@ const API_URL = process.env.REACT_APP_ROUTEFINDER_API_URL;
 
 export async function findFastestRoute(
   routeRequest: RouteRequest
-): Promise<RouteResponse> {
+): Promise<RouteResponse | null> {
+  console.log("start findFastestRoute");
+
   const data = await post<RouteRequest, RouteResponseRaw>(
     `${API_URL}/fastest-route`,
     routeRequest
   );
+  console.log(data);
+  if (data.routes === null) return null;
+
   const dataFormatted = toRouteResponse(data);
   return dataFormatted;
 }
