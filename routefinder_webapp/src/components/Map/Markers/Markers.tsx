@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import iconWarehouse from "../../../assets/iconWarehouse.svg";
 import iconDeliveryAddress from "../../../assets/iconDeliveryAddress.svg";
-import { useAppContext } from "../../../context/AddressContext";
+import { useAppContext } from "../../../context/AppContext";
 import { Address } from "../../../types";
 import { toLatLng } from "../../../utils/generalUtils";
 import { Marker } from "./Marker";

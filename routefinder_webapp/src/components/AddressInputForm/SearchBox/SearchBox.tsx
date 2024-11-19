@@ -1,5 +1,4 @@
-import { usePlacesWidget } from "react-google-autocomplete";
-import React, { FC, useEffect, useState } from "react";
+import React, { FC } from "react";
 import { TextField } from "@mui/material";
 import styles from "./SearchBox.module.scss";
 import { useSearchBox } from "./hooks/useSearchBox";

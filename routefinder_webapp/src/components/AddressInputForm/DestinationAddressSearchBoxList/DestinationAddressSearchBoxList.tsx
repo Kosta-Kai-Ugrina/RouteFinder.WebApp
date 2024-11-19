@@ -1,7 +1,7 @@
 import React, { ReactNode, useEffect, useState } from "react";
 import { SearchBox } from "../SearchBox/SearchBox";
 import { toAddress } from "../../../utils/searchBoxUtils";
-import { useAppContext } from "../../../context/AddressContext";
+import { useAppContext } from "../../../context/AppContext";
 import { Address } from "../../../types";
 import { Stack } from "@mui/material";
 import { AddRemoveButtonGroup } from "../AddRemoveButtonGroup/AddRemoveButtonGroup";

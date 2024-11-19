@@ -5,7 +5,7 @@ import { StartAddressSearchBox } from "./StartAddressSearchBox/StartAddressSearc
 import { DestinationAddressSearchBoxList } from "./DestinationAddressSearchBoxList/DestinationAddressSearchBoxList";
 import { FindRouteButton } from "./FindRouteButton/FindRouteButton";
 import { RouteStatistics } from "./RouteStatistics/RouteStatistics";
-import { useAppContext } from "../../context/AddressContext";
+import { useAppContext } from "../../context/AppContext";
 import { ErrorInfo } from "./ErrorInfo/ErrorInfo";
 import styles from "./AddressInputForm.module.scss";
 import { FetchProgressBar } from "./FetchProgressBar/FetchProgressBar";

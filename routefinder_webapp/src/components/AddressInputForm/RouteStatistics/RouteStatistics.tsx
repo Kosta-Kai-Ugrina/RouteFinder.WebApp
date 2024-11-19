@@ -1,6 +1,6 @@
 import { Divider, Stack, Typography } from "@mui/material";
 import React, { FC } from "react";
-import { useAppContext } from "../../../context/AddressContext";
+import { useAppContext } from "../../../context/AppContext";
 import { useRouteStatistics } from "./hooks/useRouteStatistics";
 
 const COLOR = "white";

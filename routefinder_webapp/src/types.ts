@@ -17,12 +17,14 @@ export interface RouteResponseRaw {
       polyline: { encodedPolyline: string };
     }
   ];
+  optimizedAddressDestinationList: Address[];
 }
 
 export interface RouteResponse {
   distanceMeters: number;
   duration: number;
   polyline: google.maps.LatLng[];
+  optimizedRoute: Address[];
 }
 
 export function validationFail(error: string): RequestValidationResult {

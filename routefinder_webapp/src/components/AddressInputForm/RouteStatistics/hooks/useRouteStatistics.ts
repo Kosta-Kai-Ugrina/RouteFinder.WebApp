@@ -1,4 +1,4 @@
-import { useAppContext } from "../../../../context/AddressContext";
+import { useAppContext } from "../../../../context/AppContext";
 
 export const useRouteStatistics = () => {
   const { duration, distanceMeters } = useAppContext();

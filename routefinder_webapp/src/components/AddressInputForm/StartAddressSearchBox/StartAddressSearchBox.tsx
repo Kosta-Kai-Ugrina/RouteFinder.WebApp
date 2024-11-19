@@ -1,6 +1,6 @@
 import React, { CSSProperties, FC } from "react";
 import { SearchBox } from "../SearchBox/SearchBox";
-import { useAppContext } from "../../../context/AddressContext";
+import { useAppContext } from "../../../context/AppContext";
 import { toAddress } from "../../../utils/searchBoxUtils";
 import { Stack } from "@mui/material";
 import iconWarehouse from "../../../assets/iconWarehouse.svg";

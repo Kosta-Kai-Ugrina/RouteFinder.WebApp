@@ -11,6 +11,7 @@ const defaultDestinationList: Address[] = [{}];
 
 interface AppContextType {
   isFetching: boolean;
+  optimizedRoute: Address[] | null;
   error: string | null;
   routePolyline: google.maps.LatLng[] | null;
   duration: number | null;
@@ -18,6 +19,7 @@ interface AppContextType {
   addressStart: Address;
   addressDestinationList: Address[];
   setIsFetching: (value: boolean) => void;
+  setOptimizedRoute: (value: Address[] | null) => void;
   setError: (error: string | null) => void;
   setRouteDataResponse: (routeData: RouteResponse | null) => void;
   setAddresses: (route: {
@@ -32,7 +34,7 @@ const AppContext = createContext<AppContextType | undefined>(undefined);
 export const useAppContext = (): AppContextType => {
   const context = useContext(AppContext);
   if (!context) {
-    throw new Error("useAddressContext must be used within an AddressProvider");
+    throw new Error("useAppContext must be used within an AppProvider");
   }
   return context;
 };
@@ -45,6 +47,7 @@ export const AppContextProvider: React.FC<AppContextProviderProps> = ({
   children,
 }) => {
   const [isFetching, setIsFetching] = useState<boolean>(false);
+  const [optimizedRoute, setOptimizedRoute] = useState<Address[] | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [routePolyline, setRoutePolyline] = useState<
     google.maps.LatLng[] | null
@@ -66,6 +69,7 @@ export const AppContextProvider: React.FC<AppContextProviderProps> = ({
     }
     if (route.addressDestinationList !== undefined) {
       setError(null);
+      setOptimizedRoute(null);
       setAddressDestinationList(route.addressDestinationList);
     }
   };
@@ -75,6 +79,7 @@ export const AppContextProvider: React.FC<AppContextProviderProps> = ({
     setRoutePolyline(routeData?.polyline ?? null);
     setDuration(routeData?.duration ?? null);
     setDistanceMeters(routeData?.distanceMeters ?? null);
+    setOptimizedRoute(routeData?.optimizedRoute ?? null);
   };
 
   const updateDestinationAddressAt = (address: Address, index: number) => {
@@ -89,6 +94,7 @@ export const AppContextProvider: React.FC<AppContextProviderProps> = ({
     <AppContext.Provider
       value={{
         isFetching,
+        optimizedRoute,
         error,
         routePolyline,
         duration,
@@ -96,6 +102,7 @@ export const AppContextProvider: React.FC<AppContextProviderProps> = ({
         addressStart,
         addressDestinationList,
         setIsFetching,
+        setOptimizedRoute,
         setError,
         setRouteDataResponse,
         setAddresses,

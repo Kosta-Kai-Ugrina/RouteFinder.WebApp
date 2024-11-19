@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { useAppContext } from "../../../context/AddressContext";
+import { useAppContext } from "../../../context/AppContext";
 import { Paper, Typography } from "@mui/material";
 
 import styles from "./ErrorInfo.module.scss";

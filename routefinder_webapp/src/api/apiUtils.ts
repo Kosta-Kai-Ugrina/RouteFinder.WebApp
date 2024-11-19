@@ -42,6 +42,7 @@ export function toRouteResponse(
     distanceMeters: distanceMeters,
     duration: parseDuration(duration),
     polyline: toPolylinePath(encodedPolyline),
+    optimizedRoute: routeResponseRaw.optimizedAddressDestinationList,
   };
 }
 
