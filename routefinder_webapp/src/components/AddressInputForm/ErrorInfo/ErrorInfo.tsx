@@ -1,11 +1,11 @@
 import React, { FC } from "react";
-import { useAddressContext } from "../../../context/AddressContext";
+import { useAppContext } from "../../../context/AddressContext";
 import { Paper, Typography } from "@mui/material";
 
 import styles from "./ErrorInfo.module.scss";
 
 export const ErrorInfo: FC = () => {
-  const { error } = useAddressContext();
+  const { error } = useAppContext();
 
   return (
     <Paper className={styles.container} elevation={2}>

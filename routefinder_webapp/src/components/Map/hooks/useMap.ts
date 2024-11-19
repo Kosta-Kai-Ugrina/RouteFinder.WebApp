@@ -1,9 +1,9 @@
 import { useCallback, useMemo, useState } from "react";
-import { useAddressContext } from "../../../context/AddressContext";
+import { useAppContext } from "../../../context/AddressContext";
 import { useJsApiLoader } from "@react-google-maps/api";
 
 export const useMap = () => {
-  const { addressStart } = useAddressContext();
+  const { addressStart } = useAppContext();
 
   const center = useMemo(
     () => ({

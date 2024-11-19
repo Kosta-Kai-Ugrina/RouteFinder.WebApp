@@ -1,8 +1,8 @@
-import { useAddressContext } from "../../../../context/AddressContext";
+import { useAppContext } from "../../../../context/AddressContext";
 import { Address } from "../../../../types";
 
 export const useAddRemoveButtonGroup = () => {
-  const { addressDestinationList, setAddresses } = useAddressContext();
+  const { addressDestinationList, setAddresses } = useAppContext();
   const isMinimumAmountOfAddresses = addressDestinationList.length <= 1;
   const addAddress = () => {
     const newAddress: Address = {};

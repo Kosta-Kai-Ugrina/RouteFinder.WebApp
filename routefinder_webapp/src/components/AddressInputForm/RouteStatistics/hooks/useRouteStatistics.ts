@@ -1,7 +1,7 @@
-import { useAddressContext } from "../../../../context/AddressContext";
+import { useAppContext } from "../../../../context/AddressContext";
 
 export const useRouteStatistics = () => {
-  const { duration, distanceMeters } = useAddressContext();
+  const { duration, distanceMeters } = useAppContext();
   const durationFormatted = formatTime(duration);
   const distanceFormatted = formatDistance(distanceMeters);
 

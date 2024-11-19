@@ -2,7 +2,7 @@ import React, { FC } from "react";
 import { ReactComponent as IconDeliveryAddress } from "../../../assets/iconDeliveryAddress.svg";
 import { ReactComponent as IconWarehouse } from "../../../assets/iconWarehouse.svg";
 import { toAddress } from "../../../utils/searchBoxUtils";
-import { useAddressContext } from "../../../context/AddressContext";
+import { useAppContext } from "../../../context/AddressContext";
 import { Stack } from "@mui/material";
 import styles from "./IconSearchBox.module.scss";
 import { SearchBox } from "../SearchBox/SearchBox";

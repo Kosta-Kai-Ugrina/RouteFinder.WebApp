@@ -2,7 +2,7 @@ import { Button, ButtonGroup, Fab, Stack, Tooltip } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import React, { FC } from "react";
-import { useAddressContext } from "../../../context/AddressContext";
+import { useAppContext } from "../../../context/AddressContext";
 import { Address } from "../../../types";
 import styles from "./AddRemoveButtonGroup.module.scss";
 import { useAddRemoveButtonGroup } from "./hooks/useAddRemoveButtonGroup";

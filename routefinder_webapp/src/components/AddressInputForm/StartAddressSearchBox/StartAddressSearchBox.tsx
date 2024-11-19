@@ -1,6 +1,6 @@
 import React, { CSSProperties, FC } from "react";
 import { SearchBox } from "../SearchBox/SearchBox";
-import { useAddressContext } from "../../../context/AddressContext";
+import { useAppContext } from "../../../context/AddressContext";
 import { toAddress } from "../../../utils/searchBoxUtils";
 import { Stack } from "@mui/material";
 import iconWarehouse from "../../../assets/iconWarehouse.svg";
@@ -8,7 +8,7 @@ import { ReactComponent as Icon } from "../../../assets/iconWarehouse.svg";
 import { IconSearchBox } from "../IconSearchBox/IconSearchBox";
 
 export const StartAddressSearchBox: FC = () => {
-  const { addressStart, setAddresses } = useAddressContext();
+  const { addressStart, setAddresses } = useAppContext();
 
   return (
     <IconSearchBox

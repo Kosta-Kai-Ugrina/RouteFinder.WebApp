@@ -9,7 +9,7 @@ const defaultAddressStart: Address = {
 
 const defaultDestinationList: Address[] = [{}];
 
-interface AddressContextType {
+interface AppContextType {
   isFetching: boolean;
   error: string | null;
   routePolyline: google.maps.LatLng[] | null;
@@ -27,21 +27,21 @@ interface AddressContextType {
   updateDestinationAddressAt: (address: Address, index: number) => void;
 }
 
-const AddressContext = createContext<AddressContextType | undefined>(undefined);
+const AppContext = createContext<AppContextType | undefined>(undefined);
 
-export const useAddressContext = (): AddressContextType => {
-  const context = useContext(AddressContext);
+export const useAppContext = (): AppContextType => {
+  const context = useContext(AppContext);
   if (!context) {
     throw new Error("useAddressContext must be used within an AddressProvider");
   }
   return context;
 };
 
-interface AddressProviderProps {
+interface AppContextProviderProps {
   children: ReactNode;
 }
 
-export const AddressProvider: React.FC<AddressProviderProps> = ({
+export const AppContextProvider: React.FC<AppContextProviderProps> = ({
   children,
 }) => {
   const [isFetching, setIsFetching] = useState<boolean>(false);
@@ -86,7 +86,7 @@ export const AddressProvider: React.FC<AddressProviderProps> = ({
   };
 
   return (
-    <AddressContext.Provider
+    <AppContext.Provider
       value={{
         isFetching,
         error,
@@ -103,6 +103,6 @@ export const AddressProvider: React.FC<AddressProviderProps> = ({
       }}
     >
       {children}
-    </AddressContext.Provider>
+    </AppContext.Provider>
   );
 };

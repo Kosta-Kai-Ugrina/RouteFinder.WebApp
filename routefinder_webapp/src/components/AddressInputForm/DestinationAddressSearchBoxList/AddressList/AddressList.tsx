@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { useAddressContext } from "../../../../context/AddressContext";
+import { useAppContext } from "../../../../context/AddressContext";
 import { SearchBox } from "../../SearchBox/SearchBox";
 import { ReactComponent as Icon } from "../../../../assets/iconDeliveryAddress.svg";
 import { toAddress } from "../../../../utils/searchBoxUtils";
@@ -9,7 +9,7 @@ import { IconSearchBox } from "../../IconSearchBox/IconSearchBox";
 
 export const AddressList: FC = () => {
   const { addressDestinationList, updateDestinationAddressAt } =
-    useAddressContext();
+    useAppContext();
 
   return (
     <Stack spacing={1}>

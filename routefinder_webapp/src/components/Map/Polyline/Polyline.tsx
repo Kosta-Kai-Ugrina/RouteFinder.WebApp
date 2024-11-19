@@ -1,9 +1,9 @@
 import React, { FC } from "react";
 import { Polyline as GooglePolyline } from "@react-google-maps/api";
-import { useAddressContext } from "../../../context/AddressContext";
+import { useAppContext } from "../../../context/AddressContext";
 
 export const Polyline: FC = () => {
-  const { routePolyline } = useAddressContext();
+  const { routePolyline } = useAppContext();
 
   const polylineOptions: google.maps.PolylineOptions = {
     strokeColor: "#39f",

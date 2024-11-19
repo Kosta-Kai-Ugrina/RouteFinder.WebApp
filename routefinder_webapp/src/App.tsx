@@ -1,15 +1,16 @@
 import { Box, Typography } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import { AddressInputForm, Map } from "./components";
-import { AddressProvider } from "./context/AddressContext";
+import { AppContextProvider } from "./context/AddressContext";
 
 function App() {
+  const a = 1;
   return (
-    <AddressProvider>
+    <AppContextProvider>
       <Map>
         <AddressInputForm />
       </Map>
-    </AddressProvider>
+    </AppContextProvider>
   );
 }
 

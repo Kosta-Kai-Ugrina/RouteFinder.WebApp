@@ -5,13 +5,13 @@ import { StartAddressSearchBox } from "./StartAddressSearchBox/StartAddressSearc
 import { DestinationAddressSearchBoxList } from "./DestinationAddressSearchBoxList/DestinationAddressSearchBoxList";
 import { FindRouteButton } from "./FindRouteButton/FindRouteButton";
 import { RouteStatistics } from "./RouteStatistics/RouteStatistics";
-import { useAddressContext } from "../../context/AddressContext";
+import { useAppContext } from "../../context/AddressContext";
 import { ErrorInfo } from "./ErrorInfo/ErrorInfo";
 import styles from "./AddressInputForm.module.scss";
 import { FetchProgressBar } from "./FetchProgressBar/FetchProgressBar";
 
 export const AddressInputForm: FC = () => {
-  const { error } = useAddressContext();
+  const { error } = useAppContext();
 
   return (
     <Paper elevation={12} className={styles.container}>

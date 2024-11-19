@@ -1,6 +1,6 @@
 import { AxiosError } from "axios";
 import { findFastestRoute } from "../../../../api/routeFinderApi";
-import { useAddressContext } from "../../../../context/AddressContext";
+import { useAppContext } from "../../../../context/AddressContext";
 import {
   isAddressValid,
   validateRequest,
@@ -17,7 +17,7 @@ export const useFindRouteButton = () => {
     addressStart,
     addressDestinationList,
     setRouteDataResponse,
-  } = useAddressContext();
+  } = useAppContext();
   const makeRequest = () => {
     setIsFetching(true);
     setRouteDataResponse(null);
