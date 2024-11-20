@@ -1,11 +1,7 @@
 import React, { createContext, useContext, useState, ReactNode } from "react";
 import { Address, RouteResponse } from "../types";
 
-const defaultAddressStart: Address = {
-  name: "Mover Systems",
-  latitude: 55.66221993583325,
-  longitude: 12.577998762094255,
-};
+const defaultAddressStart: Address = {};
 
 const defaultDestinationList: Address[] = [{}];
 
